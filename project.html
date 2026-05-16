@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual Labs | Solution of Linear Systems</title>
+    <title>Virtual Labs - LAUC</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -12,2861 +13,581 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            background-color: #f5f7fa;
+            background-color: #f8f9fa;
             color: #333;
             line-height: 1.6;
-            display: flex;
-            min-height: 100vh;
         }
-        
+
         .container {
-            display: flex;
-            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .pcce-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-right: 25px;
+            border-right: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .pcce-logo-img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 8px;
+            background-color: white;
+            padding: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .pcce-logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pcce-logo-text .main {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .pcce-logo-text .sub {
+            font-size: 12px;
+            color: #ecf0f1;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+
+        .virtual-labs-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .virtual-labs-logo i {
+            font-size: 32px;
+            color: #3498db;
+        }
+
+        .virtual-labs-logo h1 {
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        .virtual-labs-logo span {
+            color: #3498db;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-info i {
+            font-size: 20px;
+            color: #3498db;
+        }
+
+        /* Main Content Layout */
+        .main-content {
+            display: flex;
+            margin-top: 30px;
+            gap: 30px;
+        }
+
         /* Sidebar Navigation */
         .sidebar {
-            width: 280px;
-            background: linear-gradient(to bottom, #1e3c72, #2a5298);
-            color: white;
-            padding: 30px 0;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+            flex: 0 0 280px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            padding: 20px 0;
+            height: fit-content;
         }
-        
-        .logo {
-            text-align: center;
-            padding: 0 20px 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .logo i {
-            font-size: 3rem;
-            color: #4bcffa;
+
+        .sidebar h3 {
+            padding: 0 20px 15px;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
             margin-bottom: 15px;
         }
-        
-        .logo h1 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .logo-subtitle {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        
-        .nav-tabs {
+
+        .nav-menu {
             list-style: none;
-            margin-top: 30px;
         }
-        
-        .nav-tab {
-            padding: 16px 30px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
+
+        .nav-item {
+            padding: 12px 25px;
             border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 12px;
         }
-        
-        .nav-tab:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+
+        .nav-item:hover {
+            background-color: #f8f9fa;
+            border-left-color: #3498db;
         }
-        
-        .nav-tab.active {
-            background-color: rgba(0, 0, 0, 0.2);
-            border-left: 4px solid #4bcffa;
+
+        .nav-item.active {
+            background-color: #f0f7ff;
+            border-left-color: #3498db;
+            color: #3498db;
+            font-weight: 500;
         }
-        
-        .nav-tab i {
+
+        .nav-item i {
             width: 20px;
             text-align: center;
         }
-        
-        /* Main Content Area */
-        .main-content {
+
+        /* Content Area */
+        .content {
             flex: 1;
-            margin-left: 280px;
-            padding-top: 80px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            min-height: 600px;
         }
-        
-        /* Fixed Header */
+
         .content-header {
-            background-color: white;
-            padding: 20px 40px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: 280px;
-            z-index: 100;
-            border-bottom: 1px solid #eaeaea;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
         }
-        
+
+        .breadcrumb {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+        }
+
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
         .content-header h2 {
-            color: #1e3c72;
-            font-size: 1.8rem;
-        }
-        
-        /* Content Sections */
-        .content-section {
-            display: none;
-            padding: 40px;
-            background-color: white;
-            min-height: calc(100vh - 120px);
-            margin: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .content-section.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .section-title {
-            color: #1e3c72;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #eaeaea;
-            font-size: 1.8rem;
-        }
-        
-        /* Simulation Section - ENHANCED */
-        .simulation-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-        
-        @media (max-width: 1200px) {
-            .simulation-container {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .simulation-controls {
-            background-color: #f8f9fa;
-            padding: 30px;
-            border-radius: 12px;
-            border: 2px solid #e3e7eb;
-        }
-        
-        .simulation-results {
-            background-color: white;
-            padding: 30px;
-            border-radius: 12px;
-            border: 2px solid #e3e7eb;
-        }
-        
-        .simulation-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-        
-        .simulation-header h3 {
-            color: #1e3c72;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
+            font-size: 28px;
             color: #2c3e50;
-            font-size: 1.1rem;
+            font-weight: 600;
         }
-        
-        .form-group select, .form-group input {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s;
-            background-color: white;
+
+        .content-header p {
+            color: #7f8c8d;
+            margin-top: 5px;
         }
-        
-        .form-group select:focus, .form-group input:focus {
-            outline: none;
-            border-color: #1e5799;
-            box-shadow: 0 0 0 3px rgba(30, 87, 153, 0.1);
-        }
-        
-        /* Matrix Input Section */
-        .matrix-input-section {
-            background-color: white;
-            padding: 25px;
-            border-radius: 10px;
-            border: 2px dashed #e0e0e0;
-            margin-top: 15px;
-        }
-        
-        .matrix-input-section h4 {
-            color: #1e3c72;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 1.3rem;
-        }
-        
-        .matrix-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+
+        /* Aim Sections */
+        .aim-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 20px;
-            margin-top: 20px;
+            margin-bottom: 40px;
         }
-        
-        .matrix-row {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-        
-        .matrix-cell {
-            width: 80px;
-            height: 60px;
-        }
-        
-        .matrix-cell input {
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: 600;
-            border: 2px solid #bdc3c7;
-            border-radius: 6px;
-            transition: all 0.3s;
+
+        .section-card {
             background-color: #f8f9fa;
-        }
-        
-        .matrix-cell input:focus {
-            border-color: #1e5799;
-            background-color: white;
-            box-shadow: 0 0 8px rgba(30, 87, 153, 0.2);
-            transform: scale(1.05);
-        }
-        
-        .matrix-operator {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #1e5799;
-            padding: 0 15px;
-        }
-        
-        .matrix-equals {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #e74c3c;
-            margin: 0 20px;
-        }
-        
-        .b-vector {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .b-cell {
-            width: 100px;
-            height: 60px;
-        }
-        
-        .b-cell input {
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: 600;
-            border: 2px solid #3498db;
-            border-radius: 6px;
-            background-color: #ebf5fb;
-        }
-        
-        /* Control Buttons - ENHANCED WITH GLOW AND GLEAM */
-        .control-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 14px 28px;
-            border: none;
             border-radius: 8px;
-            font-weight: 600;
-            font-size: 1rem;
+            padding: 20px;
+            text-align: center;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            border-color: #3498db;
+        }
+
+        .section-card.active {
+            background-color: #e8f4fc;
+            border-color: #3498db;
+        }
+
+        .section-card i {
+            font-size: 32px;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        .section-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        .section-card p {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        /* Question Section */
+        .question-section {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #3498db;
+        }
+
+        .question-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .question-text {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            background-color: #e8f4fc;
+            border-radius: 8px;
+            padding: 25px;
+            border: 1px solid #d1e7ff;
+        }
+
+        .feedback-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
+            gap: 15px;
+            margin-bottom: 20px;
         }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.5s;
-            z-index: -1;
+
+        .feedback-header i {
+            font-size: 28px;
+            color: #3498db;
         }
-        
-        .btn:hover::before {
-            left: 100%;
+
+        .feedback-header h3 {
+            color: #2c3e50;
+            font-size: 22px;
         }
-        
-        .btn-solve {
-            background: linear-gradient(to right, #1e5799, #2980b9);
+
+        .feedback-content {
+            margin-bottom: 25px;
+        }
+
+        .feedback-content p {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .feedback-button {
+            background: linear-gradient(to right, #3498db, #2c80b9);
             color: white;
-            flex: 2;
-            box-shadow: 0 4px 15px rgba(30, 87, 153, 0.3);
-        }
-        
-        .btn-solve:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(30, 87, 153, 0.4), 0 0 20px rgba(52, 152, 219, 0.3);
-        }
-        
-        .btn-example {
-            background: linear-gradient(to right, #27ae60, #2ecc71);
-            color: white;
-            flex: 1;
-            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
-        }
-        
-        .btn-example:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(39, 174, 96, 0.4), 0 0 20px rgba(46, 204, 113, 0.3);
-        }
-        
-        .btn-reset {
-            background: linear-gradient(to right, #e74c3c, #c0392b);
-            color: white;
-            flex: 1;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-        }
-        
-        .btn-reset:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(231, 76, 60, 0.4), 0 0 20px rgba(231, 76, 60, 0.3);
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-        }
-        
-        .btn:active {
-            transform: translateY(-1px);
-        }
-        
-        /* Enhanced Button Glow Animation */
-        @keyframes gentleGlow {
-            0%, 100% { box-shadow: 0 4px 15px rgba(30, 87, 153, 0.3); }
-            50% { box-shadow: 0 4px 20px rgba(30, 87, 153, 0.5), 0 0 15px rgba(52, 152, 219, 0.4); }
-        }
-        
-        .btn-solve {
-            animation: gentleGlow 3s infinite ease-in-out;
-        }
-        
-        @keyframes gentleGlowGreen {
-            0%, 100% { box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3); }
-            50% { box-shadow: 0 4px 20px rgba(39, 174, 96, 0.5), 0 0 15px rgba(46, 204, 113, 0.4); }
-        }
-        
-        .btn-example {
-            animation: gentleGlowGreen 3s infinite ease-in-out 0.5s;
-        }
-        
-        @keyframes gentleGlowRed {
-            0%, 100% { box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3); }
-            50% { box-shadow: 0 4px 20px rgba(231, 76, 60, 0.5), 0 0 15px rgba(231, 76, 60, 0.4); }
-        }
-        
-        .btn-reset {
-            animation: gentleGlowRed 3s infinite ease-in-out 1s;
-        }
-        
-        /* Submit Button Enhancements */
-        .submit-btn {
-            background: linear-gradient(to right, #1e5799, #2980b9);
-            color: white;
-            padding: 12px 30px;
             border: none;
-            border-radius: 8px;
-            font-weight: 600;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            font-weight: 500;
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            margin-top: 20px;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            box-shadow: 0 4px 15px rgba(30, 87, 153, 0.3);
         }
-        
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.5s;
-            z-index: -1;
+
+        .feedback-button:hover {
+            background: linear-gradient(to right, #2c80b9, #216794);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
         }
-        
-        .submit-btn:hover::before {
-            left: 100%;
-        }
-        
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(30, 87, 153, 0.4), 0 0 20px rgba(52, 152, 219, 0.3);
-        }
-        
-        @keyframes submitGlow {
-            0%, 100% { box-shadow: 0 4px 15px rgba(30, 87, 153, 0.3); }
-            50% { box-shadow: 0 4px 20px rgba(30, 87, 153, 0.5), 0 0 15px rgba(52, 152, 219, 0.4); }
-        }
-        
-        .submit-btn {
-            animation: submitGlow 3s infinite ease-in-out;
-        }
-        
-        /* Results Section */
-        .results-container {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-        
-        .results-header h3 {
-            color: #1e3c72;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .solution-status {
-            padding: 12px 20px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .status-unique {
-            background-color: #d5f4e6;
-            color: #27ae60;
-        }
-        
-        .status-infinite {
-            background-color: #fdebd0;
-            color: #f39c12;
-        }
-        
-        .status-none {
-            background-color: #fadbd8;
-            color: #e74c3c;
-        }
-        
-        .solution-content {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            flex: 1;
-        }
-        
-        .solution-values {
-            background-color: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 5px solid #1e5799;
-        }
-        
-        .solution-values h4 {
-            color: #1e3c72;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-        
-        .variables-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-        
-        .variable-item {
-            display: flex;
-            align-items: center;
-            background: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-            min-width: 120px;
-        }
-        
-        .variable-name {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: #2c3e50;
-            margin-right: 15px;
-        }
-        
-        .variable-value {
-            font-weight: 700;
-            font-size: 1.4rem;
-            color: #1e5799;
-        }
-        
-        .free-variable {
-            color: #f39c12 !important;
-        }
-        
-        /* Enhanced Graphical Representation */
-        .graphical-container {
-            background-color: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 5px solid #3498db;
-        }
-        
-        .graphical-container h4 {
-            color: #1e3c72;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .graph-canvas {
-            width: 100%;
-            height: 300px;
-            background-color: white;
-            border-radius: 8px;
-            border: 2px solid #e0e0e0;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .graph-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            padding: 20px 0;
+            text-align: center;
             color: #7f8c8d;
+            font-size: 14px;
+            border-top: 1px solid #eee;
         }
-        
-        .graph-placeholder i {
-            font-size: 4rem;
-            margin-bottom: 15px;
-            color: #bdc3c7;
-        }
-        
-        .graph-legend {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-        }
-        
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-        }
-        
-        .color-line1 { background-color: #e74c3c; }
-        .color-line2 { background-color: #3498db; }
-        .color-line3 { background-color: #2ecc71; }
-        .color-solution { background-color: #f39c12; }
-        
-        /* 3D Graph Container */
-        .graph-3d-container {
-            width: 100%;
-            height: 100%;
-            perspective: 800px;
-        }
-        
-        .graph-3d {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transform: rotateX(60deg) rotateZ(45deg);
-        }
-        
-        .axis {
-            position: absolute;
-            background-color: #7f8c8d;
-        }
-        
-        .axis-x {
-            width: 200px;
-            height: 2px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotateX(90deg);
-        }
-        
-        .axis-y {
-            width: 2px;
-            height: 200px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        
-        .axis-z {
-            width: 200px;
-            height: 2px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotateY(90deg);
-        }
-        
-        .plane {
-            position: absolute;
-            opacity: 0.3;
-            border: 1px dashed rgba(0, 0, 0, 0.2);
-        }
-        
-        .solution-point {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #f39c12;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px rgba(243, 156, 18, 0.8);
-            z-index: 10;
-        }
-        
-        /* Matrix Properties */
-        .matrix-properties {
-            background-color: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 5px solid #9b59b6;
-        }
-        
-        .matrix-properties h4 {
-            color: #1e3c72;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .properties-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        
-        .property-item {
-            background-color: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-        
-        .property-label {
-            font-size: 0.9rem;
-            color: #7f8c8d;
-            margin-bottom: 5px;
-        }
-        
-        .property-value {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #2c3e50;
-        }
-        
-        /* Pretest and Posttest Styles */
-        .question-container {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            border-left: 5px solid #3498db;
-        }
-        
-        .question {
-            margin-bottom: 20px;
-        }
-        
-        .question-text {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eaeaea;
-        }
-        
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-left: 20px;
-        }
-        
-        .option {
-            padding: 12px 20px;
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .option:hover {
-            border-color: #3498db;
-            background: #ebf5fb;
-        }
-        
-        .option.selected {
-            border-color: #27ae60;
-            background: #d5f4e6;
-        }
-        
-        .option input[type="radio"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-        
-        .answer-feedback {
-            margin-top: 15px;
-            padding: 15px;
-            border-radius: 8px;
-            display: none;
-        }
-        
-        .feedback-correct {
-            background-color: #d5f4e6;
-            border-left: 5px solid #27ae60;
-        }
-        
-        .feedback-incorrect {
-            background-color: #fdebd0;
-            border-left: 5px solid #f39c12;
-        }
-        
-        /* Theory Section Styles */
-        .theory-content {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .theory-section {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            border-left: 5px solid #1e5799;
-        }
-        
-        .theory-section h3 {
-            color: #1e3c72;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #eaeaea;
-            font-size: 1.5rem;
-        }
-        
-        .theory-section p {
-            margin-bottom: 15px;
-            line-height: 1.8;
-            color: #2c3e50;
-        }
-        
-        .theory-section ul, .theory-section ol {
-            margin-left: 30px;
-            margin-bottom: 20px;
-        }
-        
-        .theory-section li {
-            margin-bottom: 10px;
-            line-height: 1.6;
-        }
-        
-        .example-box {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            border: 2px solid #e0e0e0;
-            margin: 20px 0;
-        }
-        
-        .equation {
-            font-family: 'Courier New', monospace;
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 6px;
-            margin: 15px 0;
-            border-left: 4px solid #3498db;
-        }
-        
-        /* References Section */
-        .reference-item {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 5px solid #9b59b6;
-        }
-        
-        .reference-item h4 {
-            color: #1e3c72;
-            margin-bottom: 10px;
-        }
-        
-        /* Contributors Section - UPDATED */
-        .contributors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 25px;
-        }
-        
-        .contributor-card {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 5px solid;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .contributor-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .contributor-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.5s;
-            z-index: 1;
-        }
-        
-        .contributor-card:hover::before {
-            left: 100%;
-        }
-        
-        .guide-card {
-            border-left-color: #e74c3c;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.1);
-        }
-        
-        .leader-card {
-            border-left-color: #3498db;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.1);
-        }
-        
-        .team-card {
-            border-left-color: #2ecc71;
-            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.1);
-        }
-        
-        .contributor-card h3 {
-            color: #1e3c72;
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-        }
-        
-        .contributor-role {
+
+        .footer-logo {
             display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 15px;
+            margin: 0 5px;
+            font-weight: bold;
+            color: #2c3e50;
         }
-        
-        .role-guide {
-            background-color: #fadbd8;
-            color: #e74c3c;
+
+        /* Debug styling - to help identify if image loads */
+        .debug-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 1000;
         }
-        
-        .role-leader {
-            background-color: #d6eaf8;
-            color: #3498db;
-        }
-        
-        .role-member {
-            background-color: #d5f4e6;
-            color: #27ae60;
-        }
-        
-        /* Feedback Section */
-        .feedback-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .feedback-content textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s;
-            resize: vertical;
-            margin-bottom: 20px;
-        }
-        
+
         /* Responsive Design */
-        @media (max-width: 1024px) {
-            .sidebar {
-                width: 250px;
-            }
-            
+        @media (max-width: 992px) {
             .main-content {
-                margin-left: 250px;
+                flex-direction: column;
             }
             
-            .content-header {
-                left: 250px;
+            .sidebar {
+                width: 100%;
+            }
+            
+            .aim-sections {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             }
         }
-        
+
         @media (max-width: 768px) {
-            body {
+            .header-container {
                 flex-direction: column;
+                gap: 20px;
+                text-align: center;
             }
             
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
-            
-            .main-content {
-                margin-left: 0;
-                padding-top: 20px;
-            }
-            
-            .content-header {
-                position: relative;
-                left: 0;
-                margin: 0;
-            }
-            
-            .content-section {
-                margin: 10px;
-                padding: 25px;
-            }
-            
-            .nav-tabs {
-                display: flex;
-                overflow-x: auto;
-                margin-top: 0;
-                padding: 10px 0;
-            }
-            
-            .nav-tab {
-                padding: 12px 20px;
-                white-space: nowrap;
-                border-left: none;
-                border-bottom: 3px solid transparent;
-            }
-            
-            .nav-tab.active {
-                border-left: none;
-                border-bottom: 3px solid #4bcffa;
-            }
-            
-            .matrix-cell {
-                width: 60px;
-                height: 50px;
-            }
-            
-            .matrix-cell input {
-                font-size: 1rem;
-            }
-            
-            .b-cell {
-                width: 80px;
-                height: 50px;
-            }
-            
-            .control-buttons {
+            .logo-section {
                 flex-direction: column;
-            }
-            
-            .btn {
+                gap: 20px;
                 width: 100%;
             }
+            
+            .pcce-logo-container {
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+                padding-bottom: 20px;
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .virtual-labs-logo {
+                justify-content: center;
+            }
+            
+            .aim-sections {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
-        
-        /* Animation for solution */
-        @keyframes highlightSolution {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .highlight {
-            animation: highlightSolution 0.5s ease;
-        }
-        
-        @keyframes pulse {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.7; }
-            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        /* NEW STYLES FOR STEP-BY-STEP */
-        .step-indicator {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .step-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ccc;
-            display: inline-block;
-        }
-        .step-dot.active { background: #3498db; }
-        .step-dot.done { background: #27ae60; }
-        .step-line {
-            flex: 0 0 20px;
-            height: 2px;
-            background: #ccc;
-        }
-        .step-line.done { background: #27ae60; }
-        .step-input-area {
-            margin: 15px 0;
-        }
-        .step-input-area input {
-            padding: 8px;
-            margin: 5px;
-            width: 80px;
-        }
-        .hint-box {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 4px;
-            display: none;
-        }
-        .solution-box {
-            background: #d5f4e6;
-            border-left: 4px solid #27ae60;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 4px;
+
+        @media (max-width: 576px) {
+            .aim-sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .pcce-logo-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .pcce-logo-img {
+                width: 70px;
+                height: 70px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Sidebar Navigation (KEPT EXACTLY SAME) -->
-        <div class="sidebar">
-            <div class="logo">
-                <i class="fas fa-laptop-code"></i>
-                <h1>Virtual Labs</h1>
-                <div class="logo-subtitle">Numerical Methods - Systems of Linear Equations</div>
-            </div>
-            
-            <ul class="nav-tabs">
-                <li class="nav-tab active" data-tab="aim">
-                    <i class="fas fa-bullseye"></i>Aim
-                </li>
-                <li class="nav-tab" data-tab="pretest">
-                    <i class="fas fa-clipboard-check"></i>Pretest
-                </li>
-                <li class="nav-tab" data-tab="theory">
-                    <i class="fas fa-book"></i>Theory
-                </li>
-                <li class="nav-tab" data-tab="simulation">
-                    <i class="fas fa-calculator"></i>Simulation
-                </li>
-                <li class="nav-tab" data-tab="posttest">
-                    <i class="fas fa-question-circle"></i>Posttest
-                </li>
-                <li class="nav-tab" data-tab="references">
-                    <i class="fas fa-book-open"></i>References
-                </li>
-                <li class="nav-tab" data-tab="contributors">
-                    <i class="fas fa-users"></i>Contributors
-                </li>
-                <li class="nav-tab" data-tab="feedback">
-                    <i class="fas fa-comment-dots"></i>Feedback
-                </li>
-            </ul>
-        </div>
-        
-        <!-- Main Content Area -->
-        <div class="main-content">
-            <!-- Fixed Header -->
-            <div class="content-header">
-                <h2 id="section-header">Solution of Linear Systems</h2>
-            </div>
-            
-            <!-- Content Sections -->
-            
-            <!-- Aim Section (UPDATED - Concise) -->
-            <section id="aim" class="content-section active">
-                <h2 class="section-title">Solution of Linear Systems</h2>
-                <div class="aim-content">
-                    <h3>AIM: To find the solution of linear systems using the Rank Method and Augmented Matrix approach</h3>
-                    <p>This experiment provides a comprehensive understanding of solving systems of linear equations through the rank method. By analyzing the augmented matrix, calculating ranks of coefficient and augmented matrices, and determining consistency, students learn to classify and solve linear systems. The step-by-step approach demonstrates how to identify unique solutions, infinite solutions, or inconsistent systems, building a strong foundation in linear algebra and numerical methods.</p>
-                </div>
-            </section>
-            
-            <!-- Pretest Section (UPDATED - 10 MCQ with rank method focus) -->
-            <section id="pretest" class="content-section">
-                <h2 class="section-title">Pretest - Assess Your Prerequisite Knowledge</h2>
-                <div class="pretest-content" id="pretest-questions-container">
-                    <!-- Questions will be generated by JavaScript -->
-                </div>
-                
-                <button class="submit-btn" id="submit-pretest">
-                    <i class="fas fa-paper-plane"></i> Submit Pretest
-                </button>
-                
-                <div id="pretest-results" style="display: none;"></div>
-            </section>
-            
-            <!-- Theory Section (UPDATED - Rank Method focused notes) -->
-            <section id="theory" class="content-section">
-                <h2 class="section-title">Theory: Solving Linear Systems Using the Rank Method</h2>
-                <div class="theory-content" id="theory-content-dynamic">
-                    <!-- Theory content will be generated by JavaScript -->
-                </div>
-            </section>
-            
-            <!-- Simulation Section (COMPLETELY REDESIGNED) -->
-            <section id="simulation" class="content-section">
-                <h2 class="section-title">Interactive Step-by-Step Rank Method Solver</h2>
-                <p class="section-subtitle" style="margin-bottom: 30px; color: #7f8c8d;">Solve linear systems using the augmented matrix and rank method with guided steps</p>
-                
-                <div class="simulation-container">
-                    <!-- Left Panel: Controls and Input -->
-                    <div class="simulation-controls" id="sim-controls-panel">
-                        <!-- Step 0: Dimension Input -->
-                        <div id="step-dimension-input">
-                            <div class="simulation-header">
-                                <h3><i class="fas fa-sliders-h"></i> System Configuration</h3>
-                            </div>
-                            <div class="form-group">
-                                <label for="num-vars">Number of Variables (n):</label>
-                                <input type="number" id="num-vars" min="2" max="5" value="2" style="width: 150px;">
-                            </div>
-                            <div class="form-group">
-                                <label for="num-eqs">Number of Equations (m):</label>
-                                <input type="number" id="num-eqs" min="1" max="5" value="2" style="width: 150px;">
-                            </div>
-                            <button class="btn btn-solve" id="btn-start-system">
-                                <i class="fas fa-play"></i> Start Building System
-                            </button>
-                            <div style="margin-top: 15px; color: #7f8c8d;">
-                                <p><strong>Note:</strong> Enter any number of equations (m) and variables (n). The rank method works for all rectangular systems.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Matrix Input will be dynamically inserted here -->
-                        <div id="matrix-input-dynamic" style="display: none;"></div>
-                        
-                        <!-- Step-by-step interaction area -->
-                        <div id="step-interaction-area" style="display: none;"></div>
-                    </div>
-                    
-                    <!-- Right Panel: Results and Visualization -->
-                    <div class="simulation-results" id="sim-results-panel">
-                        <div class="results-header">
-                            <h3><i class="fas fa-chart-line"></i> Solution Results</h3>
-                            <div class="solution-status" id="solution-status">Ready</div>
-                        </div>
-                        
-                        <div class="solution-content">
-                            <div class="solution-values" id="solution-values-container">
-                                <h4><i class="fas fa-calculator"></i> Solution Values</h4>
-                                <div id="solution-display">
-                                    <p style="text-align: center; color: #7f8c8d; padding: 40px 20px;">
-                                        <i class="fas fa-calculator" style="font-size: 3rem; margin-bottom: 15px; display: block; color: #bdc3c7;"></i>
-                                        Start by configuring your system on the left
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <div class="graphical-container">
-                                <h4><i class="fas fa-project-diagram"></i> Graphical Representation</h4>
-                                <div class="graph-canvas" id="graph-canvas">
-                                    <div class="graph-placeholder" id="graph-placeholder">
-                                        <i class="fas fa-chart-area"></i>
-                                        <p>Graph will appear after solving</p>
-                                    </div>
-                                </div>
-                                <div class="graph-legend" id="graph-legend"></div>
-                            </div>
-                            
-                            <div class="matrix-properties">
-                                <h4><i class="fas fa-info-circle"></i> System Properties</h4>
-                                <div class="properties-grid" id="matrix-properties">
-                                    <div class="property-item">
-                                        <div class="property-label">System Size</div>
-                                        <div class="property-value" id="prop-size">-</div>
-                                    </div>
-                                    <div class="property-item">
-                                        <div class="property-label">Rank of A</div>
-                                        <div class="property-value" id="prop-rankA">-</div>
-                                    </div>
-                                    <div class="property-item">
-                                        <div class="property-label">Rank of [A|B]</div>
-                                        <div class="property-value" id="prop-rankAB">-</div>
-                                    </div>
-                                    <div class="property-item">
-                                        <div class="property-label">Consistency</div>
-                                        <div class="property-value" id="prop-consistency">-</div>
-                                    </div>
-                                    <div class="property-item">
-                                        <div class="property-label">Solution Type</div>
-                                        <div class="property-value" id="prop-type">-</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Posttest Section (KEPT SAME) -->
-            <section id="posttest" class="content-section">
-                <h2 class="section-title">Posttest - Practical Problem Solving</h2>
-                <div class="posttest-content">
-                    <div class="question-container">
-                        <div class="question">
-                            <div class="question-text">Problem 1: Solve the following system using Gaussian Elimination:</div>
-                            <div class="equation">
-                                2x + 3y = 8<br>
-                                4x - y = 6
-                            </div>
-                            <div class="options">
-                                <label class="option">
-                                    <input type="radio" name="p1" value="a">
-                                    x = 2, y = 1
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="p1" value="b">
-                                    x = 1, y = 2
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="p1" value="c">
-                                    x = 3, y = 0.67
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="p1" value="d">
-                                    x = 2.5, y = 1
-                                </label>
-                            </div>
-                            <div id="p1-feedback" class="answer-feedback"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="question-container">
-                        <div class="question">
-                            <div class="question-text">Problem 2: Determine the nature of solution for:</div>
-                            <div class="equation">
-                                x + 2y = 4<br>
-                                2x + 4y = 8
-                            </div>
-                            <div class="options">
-                                <label class="option">
-                                    <input type="radio" name="p2" value="a">
-                                    Unique Solution
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="p2" value="b">
-                                    No Solution
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="p2" value="c">
-                                    Infinite Solutions
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="p2" value="d">
-                                    Cannot be determined
-                                </label>
-                            </div>
-                            <div id="p2-feedback" class="answer-feedback"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="question-container">
-                        <div class="question">
-                            <div class="question-text">Problem 3: Solve the 3×3 system:</div>
-                            <div class="equation">
-                                2x + y - z = 8<br>
-                                -3x - y + 2z = -11<br>
-                                -2x + y + 2z = -3
-                            </div>
-                            <div class="options">
-                                <label class="option">
-                                    <input type="radio" name="p3" value="a">
-                                    x = 2, y = 3, z = -1
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="p3" value="b">
-                                    x = 3, y = 2, z = 1
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="p3" value="c">
-                                    x = 1, y = 2, z = 3
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="p3" value="d">
-                                    x = 2, y = 1, z = 3
-                                </label>
-                            </div>
-                            <div id="p3-feedback" class="answer-feedback"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="question-container">
-                        <div class="question">
-                            <div class="question-text">Problem 4: Calculate the determinant of matrix A for the system and determine solution type:</div>
-                            <div class="equation">
-                                A = [[1, 2], [2, 4]]
-                            </div>
-                            <div class="options">
-                                <label class="option">
-                                    <input type="radio" name="p4" value="a">
-                                    det(A) = 0, Infinite Solutions
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="p4" value="b">
-                                    det(A) = 4, Unique Solution
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="p4" value="c">
-                                    det(A) = -2, Unique Solution
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="p4" value="d">
-                                    det(A) = 0, No Solution
-                                </label>
-                            </div>
-                            <div id="p4-feedback" class="answer-feedback"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="question-container">
-                        <div class="question">
-                            <div class="question-text">Problem 5: A system has rank(A) = 2 and rank([A|B]) = 3 with 3 variables. What type of solution exists?</div>
-                            <div class="options">
-                                <label class="option">
-                                    <input type="radio" name="p5" value="a">
-                                    Unique Solution
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="p5" value="b">
-                                    Infinite Solutions
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="p5" value="c">
-                                    No Solution
-                                </label>
-                                <label class="option">
-                                    <input type="radio" name="p5" value="d">
-                                    Cannot be determined
-                                </label>
-                            </div>
-                            <div id="p5-feedback" class="answer-feedback"></div>
-                        </div>
-                    </div>
-                    
-                    <button class="submit-btn" id="submit-posttest">
-                        <i class="fas fa-paper-plane"></i> Submit Posttest
-                    </button>
-                    
-                    <div id="posttest-results" style="display: none;"></div>
-                </div>
-            </section>
-            
-            <!-- References Section (KEPT SAME) -->
-            <section id="references" class="content-section">
-                <h2 class="section-title">References & Further Reading</h2>
-                <div class="references-content">
-                    <div class="reference-item">
-                        <h4>Numerical Methods for Engineers</h4>
-                        <p><strong>Author:</strong> Steven C. Chapra, Raymond P. Canale</p>
-                        <p><strong>Publisher:</strong> McGraw-Hill Education</p>
-                        <p><strong>Topics:</strong> Linear algebra, matrix operations, numerical solutions</p>
-                    </div>
-                    
-                    <div class="reference-item">
-                        <h4>Linear Algebra and Its Applications</h4>
-                        <p><strong>Author:</strong> David C. Lay, Steven R. Lay, Judi J. McDonald</p>
-                        <p><strong>Publisher:</strong> Pearson</p>
-                        <p><strong>Topics:</strong> Linear systems, matrix theory, vector spaces</p>
-                    </div>
-                    
-                    <div class="reference-item">
-                        <h4>Introduction to Linear Algebra</h4>
-                        <p><strong>Author:</strong> Gilbert Strang</p>
-                        <p><strong>Publisher:</strong> Wellesley-Cambridge Press</p>
-                        <p><strong>Topics:</strong> Fundamental concepts, applications of linear algebra</p>
-                    </div>
-                    
-                    <div class="reference-item">
-                        <h4>Online Resources</h4>
-                        <p><strong>Khan Academy:</strong> Linear algebra course - Free online tutorials</p>
-                        <p><strong>MIT OpenCourseWare:</strong> Linear Algebra lectures by Gilbert Strang</p>
-                        <p><strong>Wolfram MathWorld:</strong> Comprehensive linear algebra documentation</p>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Contributors Section (KEPT SAME) -->
-            <section id="contributors" class="content-section">
-                <h2 class="section-title">Contributors</h2>
-                <div class="contributors-content">
-                    <div class="contributors-grid">
-                        <div class="contributor-card guide-card">
-                            <div class="contributor-role role-guide">Project Guide</div>
-                            <h3><i class="fas fa-chalkboard-teacher"></i> Dinesh Kute</h3>
-                            <p><strong>Role:</strong> Project Guide & Mentor</p>
-                            <p><strong>Department:</strong> Information Technology</p>
-                            <p><strong>Contributions:</strong> Academic guidance, concept validation, project supervision</p>
-                        </div>
-                        
-                        <div class="contributor-card leader-card">
-                            <div class="contributor-role role-leader">Team Leader</div>
-                            <h3><i class="fas fa-user-tie"></i> Nakshatra Lalwani</h3>
-                            <p><strong>Role:</strong> Team Leader & Lead Developer</p>
-                            <p><strong>Email:</strong> nakshatra.lalwani25@pccoepune.org</p>
-                            <p><strong>Contributions:</strong> System architecture, core development, project management</p>
-                        </div>
-                        
-                        <div class="contributor-card team-card">
-                            <div class="contributor-role role-member">Development Team</div>
-                            <h3><i class="fas fa-code"></i> Siya Dubey</h3>
-                            <p><strong>Role:</strong> Frontend Developer</p>
-                            <p><strong>Contributions:</strong> UI/UX design, interactive components, styling</p>
-                        </div>
-                        
-                        <div class="contributor-card team-card">
-                            <div class="contributor-role role-member">Development Team</div>
-                            <h3><i class="fas fa-laptop-code"></i> Radnyee Jagtap</h3>
-                            <p><strong>Role:</strong> Backend Developer</p>
-                            <p><strong>Contributions:</strong> Algorithm implementation, data processing, validation</p>
-                        </div>
-                        
-                        <div class="contributor-card team-card">
-                            <div class="contributor-role role-member">Development Team</div>
-                            <h3><i class="fas fa-cogs"></i> Shravan Ganjewar</h3>
-                            <p><strong>Role:</strong> Full Stack Developer</p>
-                            <p><strong>Contributions:</strong> Integration, testing, documentation, deployment</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Feedback Section (KEPT SAME) -->
-            <section id="feedback" class="content-section">
-                <h2 class="section-title">Feedback</h2>
-                <div class="feedback-content">
-                    <p>We value your feedback to improve this virtual lab experiment. Please share your experience and suggestions.</p>
-                    
-                    <form id="feedback-form">
-                        <div class="form-group">
-                            <label for="name">Name (Optional):</label>
-                            <input type="text" id="name" placeholder="Enter your name">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email (Optional):</label>
-                            <input type="email" id="email" placeholder="Enter your email">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="rating">Overall Rating:</label>
-                            <select id="rating">
-                                <option value="">Select rating</option>
-                                <option value="5">Excellent</option>
-                                <option value="4">Very Good</option>
-                                <option value="3">Good</option>
-                                <option value="2">Fair</option>
-                                <option value="1">Poor</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="subject">Subject:</label>
-                            <input type="text" id="subject" placeholder="Enter subject of your feedback">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="comments">Comments and Suggestions:</label>
-                            <textarea id="comments" rows="5" placeholder="Please provide your detailed feedback here..."></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="send-copy">
-                                <input type="checkbox" id="send-copy" checked>
-                                Send a copy to my email
-                            </label>
-                        </div>
-                        
-                        <button type="submit" id="submit-feedback" class="btn btn-solve" style="width: auto; padding: 12px 30px;">
-                            <i class="fas fa-paper-plane"></i> Submit Feedback
-                        </button>
-                    </form>
-                    
-                    <div id="feedback-status" style="margin-top: 20px; padding: 15px; border-radius: 5px; display: none;"></div>
-                </div>
-            </section>
-        </div>
+    <!-- Debug info - remove this in production -->
+    <div class="debug-info" id="debugInfo">
+        Checking image loading...
     </div>
-    
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo-section">
+                <!-- PCOE Logo -->
+                <div class="pcce-logo-container">
+                    <!-- Using GitHub raw URL with fallback -->
+                    <img src="https://raw.githubusercontent.com/dineshkute90/virtual_lab_LAUC/main/pccoe.png" 
+                         alt="PCOE Logo" 
+                         class="pcce-logo-img"
+                         id="pcceLogo"
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/60x60/2c3e50/ffffff?text=PCOE';">
+                    <div class="pcce-logo-text">
+                        <div class="main">APPLIED SCIENCES & HUMANITIES</div>
+                        <div class="sub">Pimpri Chinchwad College of Engineering</div>
+                    </div>
+                </div>
+                
+                <!-- Virtual Labs Logo -->
+                <div class="virtual-labs-logo">
+                    <i class="fas fa-flask"></i>
+                    <h1>Virtual <span>Labs</span></h1>
+                </div>
+            </div>
+            
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span>Welcome, Student</span>
+            </div>
+        </div>
+    </header>
+
+        <!-- Content Area -->
+        <main class="content">
+            <div class="content-header">
+                
+                <h2>A Virtual Lab on Rank of Matrix</h2>
+                <p>Engineering Mathematics Experiment</p>
+            </div>
+
+            <!-- Aim Sections -->
+            <div class="aim-sections">
+                <div class="section-card active">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Aim</h3>
+                    <p>Objective of the experiment</p>
+                </div>
+                <div class="section-card">
+                    <i class="fas fa-book"></i>
+                    <h3>Theory</h3>
+                    <p>Background concepts</p>
+                </div>
+                <div class="section-card">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>Pretest</h3>
+                    <p>Pre-experiment assessment</p>
+                </div>
+                <div class="section-card">
+                    <i class="fas fa-desktop"></i>
+                    <h3>Simulation</h3>
+                    <p>Interactive simulation</p>
+                </div>
+                <div class="section-card">
+                    <i class="fas fa-clipboard-check"></i>
+                    <h3>Posttest</h3>
+                    <p>Post-experiment assessment</p>
+                </div>
+                <div class="section-card">
+                    <i class="fas fa-book-open"></i>
+                    <h3>References</h3>
+                    <p>Further reading materials</p>
+                </div>
+                <div class="section-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Contributors</h3>
+                    <p>People involved</p>
+                </div>
+                <div class="section-card feedback-card">
+                    <i class="fas fa-comment-alt"></i>
+                    <h3>Feedback</h3>
+                    <p>Share your experience</p>
+                </div>        
+            </div>
+
+    <!-- Footer -->
+    <footer class="container">
+        <p>Virtual Labs &copy; 2025 | Applied Sciences & Humanities Department | 
+           <span class="footer-logo">Pimpri Chinchwad College of Engineering</span>
+        </p>
+    </footer>
+
     <script>
-        // ============ COMPLETE REDESIGNED JAVASCRIPT ============
-        
+        // Debug image loading
         document.addEventListener('DOMContentLoaded', function() {
-            // Tab Switching
-            const tabs = document.querySelectorAll('.nav-tab');
-            const contentSections = document.querySelectorAll('.content-section');
-            const sectionHeader = document.getElementById('section-header');
+            const logoImg = document.getElementById('pcceLogo');
+            const debugInfo = document.getElementById('debugInfo');
             
-            const sectionTitles = {
-                'aim': 'Solution of Linear Systems',
-                'pretest': 'Pretest - Assess Your Knowledge',
-                'theory': 'Theory of Solution of Linear Systems',
-                'simulation': 'Simulation - Solve Linear Systems',
-                'posttest': 'Posttest - Practical Problem Solving',
-                'references': 'References',
-                'contributors': 'Contributors',
-                'feedback': 'Feedback'
+            logoImg.onload = function() {
+                debugInfo.innerHTML = '✓ PCOE logo loaded successfully';
+                debugInfo.style.background = 'rgba(46, 204, 113, 0.8)';
+                setTimeout(() => {
+                    debugInfo.style.display = 'none';
+                }, 3000);
             };
             
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    contentSections.forEach(section => section.classList.remove('active'));
-                    tab.classList.add('active');
-                    const tabId = tab.getAttribute('data-tab');
-                    document.getElementById(tabId).classList.add('active');
-                    sectionHeader.textContent = sectionTitles[tabId];
-                });
-            });
+            logoImg.onerror = function() {
+                debugInfo.innerHTML = '✗ PCOE logo failed to load, using fallback';
+                debugInfo.style.background = 'rgba(231, 76, 60, 0.8)';
+                setTimeout(() => {
+                    debugInfo.style.display = 'none';
+                }, 5000);
+            };
             
-            // Initialize all sections
-            initializePretest();
-            initializeTheory();
-            initializeSimulation();
-            initializePosttest();
-            initializeFeedback();
+            // Check after 2 seconds if image loaded
+            setTimeout(() => {
+                if (!logoImg.complete || logoImg.naturalHeight === 0) {
+                    debugInfo.innerHTML = '⚠️ PCOE logo loading slowly...';
+                }
+            }, 2000);
         });
-        
-        // ============ PRETEST INITIALIZATION ============
-        function initializePretest() {
-            const pretestQuestions = [
-                {
-                    id: 'q1',
-                    text: 'Question 1: For the system Ax = B, if rank(A) = rank([A|B]) = n (number of variables), then the system has:',
-                    options: [
-                        { value: 'a', text: 'No solution' },
-                        { value: 'b', text: 'Unique solution' },
-                        { value: 'c', text: 'Infinite solutions' },
-                        { value: 'd', text: 'Cannot be determined' }
-                    ],
-                    correct: 'b',
-                    explanation: 'When rank(A) = rank([A|B]) = n, the system is consistent and has exactly one unique solution. This is the fundamental condition for a unique solution.',
-                    steps: 'Step 1: Form augmented matrix [A|B]\nStep 2: Find rank(A) and rank([A|B])\nStep 3: Compare with number of variables n\nStep 4: If both ranks equal n, unique solution exists'
-                },
-                {
-                    id: 'q2',
-                    text: 'Question 2: Given the augmented matrix [[1,2,3],[2,4,6]]. What type of solution does this system have?',
-                    options: [
-                        { value: 'a', text: 'Unique solution' },
-                        { value: 'b', text: 'No solution' },
-                        { value: 'c', text: 'Infinite solutions' },
-                        { value: 'd', text: 'Cannot determine' }
-                    ],
-                    correct: 'c',
-                    explanation: 'Row 2 is a multiple of Row 1 (2×). rank(A) = rank([A|B]) = 1, but n = 3. Since rank < n, the system has infinite solutions.',
-                    steps: 'Step 1: Write augmented matrix [[1,2,3],[2,4,6]]\nStep 2: Perform R2 → R2 - 2R1 = [0,0,0]\nStep 3: rank = 1, but variables = 2 (x and y)\nStep 4: Since rank < n, infinite solutions exist'
-                },
-                {
-                    id: 'q3',
-                    text: 'Question 3: If rank(A) = 2 and rank([A|B]) = 3 for a system with 3 variables, the system is:',
-                    options: [
-                        { value: 'a', text: 'Consistent with unique solution' },
-                        { value: 'b', text: 'Consistent with infinite solutions' },
-                        { value: 'c', text: 'Inconsistent (no solution)' },
-                        { value: 'd', text: 'Homogeneous system' }
-                    ],
-                    correct: 'c',
-                    explanation: 'When rank(A) ≠ rank([A|B]), the system is inconsistent. The augmented matrix has a higher rank, indicating contradictory equations.',
-                    steps: 'Step 1: Note rank(A) = 2 and rank([A|B]) = 3\nStep 2: Since ranks are different, system is inconsistent\nStep 3: No solution exists\nStep 4: This means equations contradict each other'
-                },
-                {
-                    id: 'q4',
-                    text: 'Question 4: For a homogeneous system (B = 0), which is ALWAYS true?',
-                    options: [
-                        { value: 'a', text: 'The system has only trivial solution' },
-                        { value: 'b', text: 'The system is always consistent' },
-                        { value: 'c', text: 'The determinant must be non-zero' },
-                        { value: 'd', text: 'The system has no solution' }
-                    ],
-                    correct: 'b',
-                    explanation: 'A homogeneous system (Ax = 0) is always consistent because x = 0 (trivial solution) always satisfies it. If rank(A) < n, non-trivial solutions also exist.',
-                    steps: 'Step 1: Homogeneous system means Ax = 0\nStep 2: x = 0 is always a solution (trivial)\nStep 3: Therefore, the system is always consistent\nStep 4: If rank(A) < n, non-trivial solutions exist too'
-                },
-                {
-                    id: 'q5',
-                    text: 'Question 5: What is the augmented matrix for the system: 2x + y = 5, 3x - y = 0?',
-                    options: [
-                        { value: 'a', text: '[[2,1,5],[3,-1,0]]' },
-                        { value: 'b', text: '[[2,1],[3,-1],[5,0]]' },
-                        { value: 'c', text: '[[2,3,5],[1,-1,0]]' },
-                        { value: 'd', text: '[[5,2,1],[0,3,-1]]' }
-                    ],
-                    correct: 'a',
-                    explanation: 'The augmented matrix combines coefficient matrix with the RHS. First equation: 2x + y = 5 → [2,1,5]. Second: 3x - y = 0 → [3,-1,0].',
-                    steps: 'Step 1: Write first equation: 2x + y = 5\nStep 2: Extract coefficients: [2, 1, 5]\nStep 3: Write second equation: 3x - y = 0\nStep 4: Extract coefficients: [3, -1, 0]\nStep 5: Combine: [[2,1,5],[3,-1,0]]'
-                },
-                {
-                    id: 'q6',
-                    text: 'Question 6: After row reduction, if we get a row [0,0,0|5] in the augmented matrix, this indicates:',
-                    options: [
-                        { value: 'a', text: 'Unique solution' },
-                        { value: 'b', text: 'Infinite solutions' },
-                        { value: 'c', text: 'No solution' },
-                        { value: 'd', text: 'Trivial solution' }
-                    ],
-                    correct: 'c',
-                    explanation: 'A row [0,0,0|5] represents 0x + 0y + 0z = 5, which is impossible (0 = 5). This contradiction means the system has no solution.',
-                    steps: 'Step 1: Interpret [0,0,0|5]\nStep 2: This means 0x + 0y + 0z = 5\nStep 3: Or 0 = 5, which is impossible\nStep 4: Therefore, no solution exists (inconsistent)'
-                },
-                {
-                    id: 'q7',
-                    text: 'Question 7: What is rank of matrix A = [[1,2,3],[2,4,6],[3,6,9]]?',
-                    options: [
-                        { value: 'a', text: '0' },
-                        { value: 'b', text: '1' },
-                        { value: 'c', text: '2' },
-                        { value: 'd', text: '3' }
-                    ],
-                    correct: 'b',
-                    explanation: 'All rows are multiples of the first row (R2 = 2×R1, R3 = 3×R1). Therefore, only one linearly independent row exists, giving rank = 1.',
-                    steps: 'Step 1: Observe matrix A\nStep 2: R2 = 2 × R1\nStep 3: R3 = 3 × R1\nStep 4: All rows are dependent on R1\nStep 5: Only 1 independent row → rank = 1'
-                },
-                {
-                    id: 'q8',
-                    text: 'Question 8: For a 3×3 system, if rank(A) = 2 and rank([A|B]) = 2 with n = 3, the solution is:',
-                    options: [
-                        { value: 'a', text: 'Unique point' },
-                        { value: 'b', text: 'A line (infinite solutions)' },
-                        { value: 'c', text: 'A plane (infinite solutions)' },
-                        { value: 'd', text: 'No solution' }
-                    ],
-                    correct: 'b',
-                    explanation: 'When rank = 2 and n = 3, the solution space is n - rank = 1 dimensional. This means solutions form a line (one free variable).',
-                    steps: 'Step 1: Identify rank(A) = rank([A|B]) = 2\nStep 2: Number of variables n = 3\nStep 3: Solution dimension = n - rank = 3 - 2 = 1\nStep 4: A 1-dimensional solution set is a line → infinite solutions'
-                },
-                {
-                    id: 'q9',
-                    text: 'Question 9: Which row operation does NOT change the solution of a linear system?',
-                    options: [
-                        { value: 'a', text: 'Swapping two rows' },
-                        { value: 'b', text: 'Multiplying a row by zero' },
-                        { value: 'c', text: 'Adding a multiple of one row to another' },
-                        { value: 'd', text: 'Both a and c' }
-                    ],
-                    correct: 'd',
-                    explanation: 'Swapping rows and adding multiples of rows are legitimate row operations. Multiplying a row by zero destroys information and changes the system.',
-                    steps: 'Step 1: Valid operations: swapping rows, scaling by non-zero, adding multiples\nStep 2: Swapping rows (R1 ↔ R2) preserves equations\nStep 3: Adding multiples (R2 → R2 + kR1) preserves equivalence\nStep 4: Multiplying by zero destroys the equation'
-                },
-                {
-                    id: 'q10',
-                    text: 'Question 10: If the augmented matrix reduces to [[1,2,0,5],[0,0,1,3],[0,0,0,0]], what is the solution?',
-                    options: [
-                        { value: 'a', text: 'x₁ = 5, x₂ = t, x₃ = 3 (t free)' },
-                        { value: 'b', text: 'x₁ = 5 - 2t, x₂ = t, x₃ = 3 (t free)' },
-                        { value: 'c', text: 'No solution' },
-                        { value: 'd', text: 'x₁ = 5, x₂ = 0, x₃ = 3' }
-                    ],
-                    correct: 'b',
-                    explanation: 'From RREF: x₁ + 2x₂ = 5 and x₃ = 3. Since x₂ is free, x₁ = 5 - 2t where t is any real number. x₂ is a free variable.',
-                    steps: 'Step 1: Read from RREF matrix\nStep 2: Row 1: x₁ + 2x₂ = 5 → x₁ = 5 - 2x₂\nStep 3: Row 2: x₃ = 3\nStep 4: Row 3: 0 = 0 (redundant)\nStep 5: x₂ is free variable (no pivot)\nStep 6: Solution: x₁ = 5 - 2t, x₂ = t, x₃ = 3'
-                }
-            ];
-            
-            const container = document.getElementById('pretest-questions-container');
-            container.innerHTML = '';
-            
-            pretestQuestions.forEach((q, idx) => {
-                const questionHTML = `
-                    <div class="question-container" id="pretest-${q.id}">
-                        <div class="question">
-                            <div class="question-text">${q.text}</div>
-                            <div class="options">
-                                ${q.options.map(opt => `
-                                    <label class="option">
-                                        <input type="radio" name="${q.id}" value="${opt.value}">
-                                        ${opt.text}
-                                    </label>
-                                `).join('')}
-                            </div>
-                            <div id="${q.id}-feedback" class="answer-feedback"></div>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += questionHTML;
+
+        // Navigation menu interaction
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
             });
-            
-            // Add click handlers
-            document.querySelectorAll('#pretest-questions-container .option').forEach(option => {
-                option.addEventListener('click', function(e) {
-                    if (e.target.type === 'radio') return;
-                    const radio = this.querySelector('input[type="radio"]');
-                    if (radio) {
-                        radio.checked = true;
-                        const options = this.closest('.options').querySelectorAll('.option');
-                        options.forEach(opt => opt.classList.remove('selected'));
-                        this.classList.add('selected');
-                        
-                        const questionId = radio.name;
-                        const value = radio.value;
-                        showPretestFeedback(questionId, value, pretestQuestions);
-                    }
-                });
+        });
+
+        // Section cards interaction
+        const sectionCards = document.querySelectorAll('.section-card');
+        sectionCards.forEach(card => {
+            card.addEventListener('click', () => {
+                sectionCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                
+                // In a real application, this would load the corresponding content
+                const sectionName = card.querySelector('h3').textContent;
+                console.log(`Loading ${sectionName} section...`);
             });
-            
-            document.getElementById('submit-pretest').addEventListener('click', function() {
-                submitPretest(pretestQuestions);
-            });
-            
-            window.pretestData = pretestQuestions;
-        }
-        
-        function showPretestFeedback(questionId, value, questions) {
-            const q = questions.find(q => q.id === questionId);
-            const feedbackDiv = document.getElementById(`${questionId}-feedback`);
-            
-            if (value === q.correct) {
-                feedbackDiv.innerHTML = `
-                    <i class="fas fa-check-circle"></i> <strong>Correct!</strong><br>
-                    <p>${q.explanation}</p>
-                    <p style="margin-top: 10px;"><strong>Step-by-step:</strong><br><pre>${q.steps}</pre></p>
-                `;
-                feedbackDiv.className = 'answer-feedback feedback-correct';
-            } else {
-                feedbackDiv.innerHTML = `
-                    <i class="fas fa-times-circle"></i> <strong>Incorrect.</strong><br>
-                    <p>Correct answer: ${q.options.find(o => o.value === q.correct).text}</p>
-                    <p>${q.explanation}</p>
-                    <p style="margin-top: 10px;"><strong>Step-by-step solution:</strong><br><pre>${q.steps}</pre></p>
-                `;
-                feedbackDiv.className = 'answer-feedback feedback-incorrect';
-            }
-            feedbackDiv.style.display = 'block';
-        }
-        
-        function submitPretest(questions) {
-            let score = 0;
-            questions.forEach(q => {
-                const selected = document.querySelector(`input[name="${q.id}"]:checked`);
-                if (selected && selected.value === q.correct) {
-                    score++;
-                    // Show correct feedback
-                    showPretestFeedback(q.id, selected.value, questions);
-                } else if (selected) {
-                    showPretestFeedback(q.id, selected.value, questions);
-                }
-            });
-            
-            const percentage = (score / questions.length) * 100;
-            const resultsDiv = document.getElementById('pretest-results');
-            
-            resultsDiv.innerHTML = `
-                <div style="background: ${percentage >= 70 ? '#d5f4e6' : percentage >= 50 ? '#fdebd0' : '#fadbd8'}; padding: 30px; border-radius: 10px; margin-top: 30px; text-align: center;">
-                    <h3>${percentage >= 70 ? 'Excellent!' : percentage >= 50 ? 'Good Effort!' : 'Keep Learning!'}</h3>
-                    <p style="font-size: 1.5rem; font-weight: bold; margin: 15px 0;">Score: ${score}/${questions.length} (${percentage.toFixed(0)}%)</p>
-                    <p>${percentage >= 70 ? 'You have strong prerequisite knowledge. Proceed to the theory section.' : 'Review the theory section thoroughly before attempting the simulation.'}</p>
-                </div>
-            `;
-            resultsDiv.style.display = 'block';
-            resultsDiv.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // ============ THEORY INITIALIZATION ============
-        function initializeTheory() {
-            const theoryContent = document.getElementById('theory-content-dynamic');
-            theoryContent.innerHTML = `
-                <div class="theory-section">
-                    <h3><i class="fas fa-calculator"></i> Rank Method for Solving Linear Systems</h3>
-                    <p>The <strong>Rank Method</strong> is a powerful technique to determine the nature of solutions for any system of linear equations, whether square or rectangular. It works by analyzing the <strong>augmented matrix</strong> and computing ranks.</p>
-                    
-                    <div class="equation">
-                        <strong>Key Formula:</strong><br>
-                        Let A be the coefficient matrix (m×n)<br>
-                        Let [A|B] be the augmented matrix (m×(n+1))<br>
-                        Then:<br>
-                        • If rank(A) = rank([A|B]) = n → <strong>Unique Solution</strong><br>
-                        • If rank(A) = rank([A|B]) &lt; n → <strong>Infinite Solutions</strong><br>
-                        • If rank(A) ≠ rank([A|B]) → <strong>No Solution (Inconsistent)</strong>
-                    </div>
-                </div>
-                
-                <div class="theory-section">
-                    <h3><i class="fas fa-project-diagram"></i> Understanding Rank</h3>
-                    <p><strong>Rank of a matrix</strong> is the maximum number of linearly independent rows (or columns). It tells us how many "useful" equations we have.</p>
-                    
-                    <p><strong>How to find rank?</strong></p>
-                    <ol>
-                        <li>Convert matrix to Row Echelon Form (REF) using elementary row operations</li>
-                        <li>Count the number of non-zero rows</li>
-                        <li>That count is the rank</li>
-                    </ol>
-                    
-                    <div class="example-box">
-                        <h4>Example: Find rank of A = [[1,2],[2,4]]</h4>
-                        <div class="equation">
-                            Step 1: Write matrix<br>
-                            [1  2]<br>
-                            [2  4]<br><br>
-                            Step 2: R₂ → R₂ - 2R₁<br>
-                            [1  2]<br>
-                            [0  0]<br><br>
-                            Step 3: Count non-zero rows = 1<br>
-                            <strong>∴ rank(A) = 1</strong>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="theory-section">
-                    <h3><i class="fas fa-cogs"></i> Step-by-Step Rank Method Algorithm</h3>
-                    <ol>
-                        <li><strong>Form the Augmented Matrix:</strong> Write the coefficient matrix A and append the RHS vector B as an extra column.</li>
-                        <li><strong>Convert to Row Echelon Form:</strong> Use elementary row operations:
-                            <ul>
-                                <li>Swap rows (Rᵢ ↔ Rⱼ)</li>
-                                <li>Multiply a row by non-zero scalar (Rᵢ → kRᵢ, k≠0)</li>
-                                <li>Add multiple of one row to another (Rᵢ → Rᵢ + kRⱼ)</li>
-                            </ul>
-                        </li>
-                        <li><strong>Find rank(A):</strong> Count non-zero rows in REF of coefficient matrix.</li>
-                        <li><strong>Find rank([A|B]):</strong> Count non-zero rows in REF of augmented matrix.</li>
-                        <li><strong>Determine Solution Type:</strong>
-                            <ul>
-                                <li>If rank(A) = rank([A|B]) = n: Unique solution exists</li>
-                                <li>If rank(A) = rank([A|B]) < n: Infinite solutions</li>
-                                <li>If rank(A) ≠ rank([A|B]): No solution</li>
-                            </ul>
-                        </li>
-                        <li><strong>Solve (if consistent):</strong> Back-substitute from REF to find values.</li>
-                    </ol>
-                </div>
-                
-                <div class="theory-section">
-                    <h3><i class="fas fa-lightbulb"></i> Important Notes</h3>
-                    <ul>
-                        <li><strong>Homogeneous Systems (B=0):</strong> Always consistent. If rank(A) = n, only trivial solution. If rank(A) < n, non-trivial solutions exist.</li>
-                        <li><strong>Square Systems (m=n):</strong> Unique solution exists iff det(A) ≠ 0 (which means rank = n).</li>
-                        <li><strong>Overdetermined Systems (m>n):</strong> More equations than variables. May be inconsistent.</li>
-                        <li><strong>Underdetermined Systems (m<n):</strong> Fewer equations than variables. If consistent, always infinite solutions.</li>
-                    </ul>
-                </div>
-                
-                <div class="theory-section">
-                    <h3><i class="fas fa-chart-line"></i> Graphical Interpretation</h3>
-                    <p><strong>In 2D (2 variables):</strong></p>
-                    <ul>
-                        <li>rank = 2, consistent → Two lines intersect at a point (unique)</li>
-                        <li>rank = 1, consistent → Both equations represent same line (infinite)</li>
-                        <li>rank(A)=1, rank([A|B])=2 → Parallel lines (no solution)</li>
-                    </ul>
-                    <p><strong>In 3D (3 variables):</strong></p>
-                    <ul>
-                        <li>rank = 3 → Three planes intersect at a point</li>
-                        <li>rank = 2 → Planes intersect along a line</li>
-                        <li>rank = 1 → All planes are the same</li>
-                        <li>Inconsistent → At least two planes are parallel</li>
-                    </ul>
-                </div>
-            `;
-        }
-        
-        // ============ SIMULATION INITIALIZATION ============
-        let simState = {
-            m: 2,
-            n: 2,
-            A: [],
-            B: [],
-            step: 0,
-            wrongAttempts: 0,
-            maxWrongAttempts: 3,
-            solutionData: null,
-            currentREF: null,
-            currentAugmented: null
-        };
-        
-        function initializeSimulation() {
-            // Start button
-            document.getElementById('btn-start-system').addEventListener('click', startSystemBuild);
-        }
-        
-        function startSystemBuild() {
-            simState.m = parseInt(document.getElementById('num-eqs').value);
-            simState.n = parseInt(document.getElementById('num-vars').value);
-            
-            if (simState.m < 1 || simState.m > 5 || simState.n < 2 || simState.n > 5) {
-                showMessage('Please enter valid dimensions: m=1-5, n=2-5', 'error');
-                return;
-            }
-            
-            simState.step = 0;
-            simState.wrongAttempts = 0;
-            simState.solutionData = null;
-            
-            buildMatrixInput();
-            document.getElementById('matrix-input-dynamic').style.display = 'block';
-            document.getElementById('step-interaction-area').style.display = 'none';
-            resetResultsPanel();
-        }
-        
-        function buildMatrixInput() {
-            const container = document.getElementById('matrix-input-dynamic');
-            let html = `
-                <div class="matrix-input-section">
-                    <h4><i class="fas fa-table"></i> Enter Augmented Matrix [A|B] (${simState.m}×${simState.n+1})</h4>
-                    <p style="text-align: center; margin-bottom: 20px; color: #7f8c8d;">Enter coefficients for each equation</p>
-                    <div class="matrix-container">
-            `;
-            
-            for (let i = 0; i < simState.m; i++) {
-                html += '<div class="matrix-row">';
-                for (let j = 0; j < simState.n; j++) {
-                    html += `<div class="matrix-cell">
-                        <input type="number" id="a${i}${j}" placeholder="a${i+1}${j+1}" step="any" value="0">
-                    </div>`;
-                }
-                html += '<div class="matrix-operator" style="font-size: 1.5rem;">|</div>';
-                html += `<div class="b-cell">
-                    <input type="number" id="b${i}" placeholder="b${i+1}" step="any" value="0">
-                </div>`;
-                html += '</div>';
-            }
-            
-            html += '</div></div>';
-            
-            html += `
-                <div class="control-buttons" style="margin-top: 20px;">
-                    <button class="btn btn-example" id="btn-load-example-sim">
-                        <i class="fas fa-magic"></i> Load Example
-                    </button>
-                    <button class="btn btn-solve" id="btn-submit-matrix">
-                        <i class="fas fa-play-circle"></i> Submit Matrix & Start Solving
-                    </button>
-                    <button class="btn btn-reset" id="btn-reset-sim">
-                        <i class="fas fa-redo"></i> Reset
-                    </button>
-                </div>
-            `;
-            
-            container.innerHTML = html;
-            
-            // Event listeners
-            document.getElementById('btn-load-example-sim').addEventListener('click', loadSimExample);
-            document.getElementById('btn-submit-matrix').addEventListener('click', submitMatrixAndStartSteps);
-            document.getElementById('btn-reset-sim').addEventListener('click', resetSimulation);
-        }
-        
-        function loadSimExample() {
-            // Random example selection
-            const examples = [
-                { A: [[2,1],[1,-1]], B: [5,1], name: '2x+y=5, x-y=1 (Unique)' },
-                { A: [[1,2],[2,4]], B: [4,8], name: 'x+2y=4, 2x+4y=8 (Infinite)' },
-                { A: [[1,1],[1,1]], B: [3,5], name: 'x+y=3, x+y=5 (No Solution)' }
-            ];
-            
-            const ex = examples[Math.floor(Math.random() * examples.length)];
-            simState.m = ex.A.length;
-            simState.n = ex.A[0].length;
-            
-            document.getElementById('num-eqs').value = simState.m;
-            document.getElementById('num-vars').value = simState.n;
-            
-            buildMatrixInput();
-            
-            // Fill values
-            setTimeout(() => {
-                for (let i = 0; i < simState.m; i++) {
-                    for (let j = 0; j < simState.n; j++) {
-                        document.getElementById(`a${i}${j}`).value = ex.A[i][j];
-                    }
-                    document.getElementById(`b${i}`).value = ex.B[i];
-                }
-            }, 100);
-            
-            showMessage(`Loaded: ${ex.name}`, 'success');
-        }
-        
-        function submitMatrixAndStartSteps() {
-            simState.A = [];
-            simState.B = [];
-            
-            for (let i = 0; i < simState.m; i++) {
-                simState.A[i] = [];
-                for (let j = 0; j < simState.n; j++) {
-                    const val = parseFloat(document.getElementById(`a${i}${j}`).value) || 0;
-                    simState.A[i][j] = val;
-                }
-                simState.B[i] = parseFloat(document.getElementById(`b${i}`).value) || 0;
-            }
-            
-            // Calculate the solution using rank method
-            const result = solveByRankMethod(simState.A, simState.B, simState.m, simState.n);
-            simState.solutionData = result;
-            
-            // Start step-by-step interaction
-            simState.step = 1;
-            simState.wrongAttempts = 0;
-            document.getElementById('step-interaction-area').style.display = 'block';
-            showStepInteraction();
-        }
-        
-        function solveByRankMethod(A, B, m, n) {
-            // Create augmented matrix
-            let augmented = [];
-            for (let i = 0; i < m; i++) {
-                augmented[i] = [...A[i], B[i]];
-            }
-            
-            // Store original
-            const originalAugmented = augmented.map(row => [...row]);
-            
-            // Convert to REF
-            let ref = augmented.map(row => [...row]);
-            let rowOps = [];
-            
-            let pivot = 0;
-            for (let col = 0; col < n && pivot < m; col++) {
-                // Find non-zero pivot
-                let maxRow = pivot;
-                for (let row = pivot; row < m; row++) {
-                    if (Math.abs(ref[row][col]) > Math.abs(ref[maxRow][col])) {
-                        maxRow = row;
-                    }
-                }
-                
-                if (Math.abs(ref[maxRow][col]) < 1e-10) continue;
-                
-                // Swap rows
-                if (maxRow !== pivot) {
-                    [ref[pivot], ref[maxRow]] = [ref[maxRow], ref[pivot]];
-                    rowOps.push(`Swap R${pivot+1} ↔ R${maxRow+1}`);
-                }
-                
-                // Normalize pivot row
-                const pivotVal = ref[pivot][col];
-                if (pivotVal !== 0) {
-                    for (let j = col; j <= n; j++) {
-                        ref[pivot][j] /= pivotVal;
-                    }
-                    rowOps.push(`R${pivot+1} → R${pivot+1}/${pivotVal.toFixed(2)}`);
-                }
-                
-                // Eliminate other rows
-                for (let row = 0; row < m; row++) {
-                    if (row !== pivot && Math.abs(ref[row][col]) > 1e-10) {
-                        const factor = ref[row][col];
-                        for (let j = col; j <= n; j++) {
-                            ref[row][j] -= factor * ref[pivot][j];
-                        }
-                        rowOps.push(`R${row+1} → R${row+1} - (${factor.toFixed(2)})×R${pivot+1}`);
-                    }
-                }
-                
-                pivot++;
-            }
-            
-            // Calculate ranks
-            const rankA = calculateRankFromREF(ref, m, n);
-            const rankAB = calculateRankFromREF(ref, m, n+1);
-            
-            // Determine solution type
-            let solutionType, solution;
-            
-            if (rankA !== rankAB) {
-                solutionType = 'none';
-                solution = null;
-            } else if (rankA === n) {
-                solutionType = 'unique';
-                solution = [];
-                for (let i = 0; i < n; i++) {
-                    solution[i] = i < m ? ref[i][n] : 0;
-                }
-            } else {
-                solutionType = 'infinite';
-                solution = [];
-                // Find free variables
-                const pivotCols = new Set();
-                let r = 0;
-                for (let c = 0; c < n; c++) {
-                    if (r < m && Math.abs(ref[r][c]) > 1e-10) {
-                        pivotCols.add(c);
-                        r++;
-                    }
-                }
-                
-                for (let i = 0; i < n; i++) {
-                    if (pivotCols.has(i)) {
-                        solution[i] = 'depends on free vars';
-                    } else {
-                        solution[i] = 'free';
-                    }
-                }
-            }
-            
-            return {
-                augmented: originalAugmented,
-                ref: ref,
-                rowOps: rowOps,
-                rankA: rankA,
-                rankAB: rankAB,
-                solutionType: solutionType,
-                solution: solution,
-                n: n,
-                m: m
-            };
-        }
-        
-        function calculateRankFromREF(ref, m, cols) {
-            let rank = 0;
-            for (let i = 0; i < m; i++) {
-                let nonZero = false;
-                for (let j = 0; j < cols; j++) {
-                    if (Math.abs(ref[i][j]) > 1e-10) {
-                        nonZero = true;
-                        break;
-                    }
-                }
-                if (nonZero) rank++;
-            }
-            return rank;
-        }
-        
-        function showStepInteraction() {
-            const container = document.getElementById('step-interaction-area');
-            const result = simState.solutionData;
-            
-            let html = '<div class="step-indicator">';
-            for (let i = 1; i <= 5; i++) {
-                if (i > 1) html += '<div class="step-line' + (i <= simState.step ? ' done' : '') + '"></div>';
-                html += `<div class="step-dot${i === simState.step ? ' active' : i < simState.step ? ' done' : ''}"></div>`;
-            }
-            html += '</div>';
-            
-            html += `<h4 style="margin-bottom: 20px;">Step ${simState.step}: `;
-            
-            switch(simState.step) {
-                case 1:
-                    html += 'Write the Augmented Matrix [A|B]</h4>';
-                    html += '<p>Write the augmented matrix by combining coefficient matrix A and vector B.</p>';
-                    html += generateAugmentedMatrixInput(result.augmented, result.m, result.n);
-                    html += '<button class="btn btn-solve" onclick="checkStepAnswer(1)" style="margin-top: 15px;">Check Augmented Matrix</button>';
-                    html += '<button class="btn" style="background: #f39c12; color: white; margin-left: 10px; margin-top: 15px;" onclick="showHint(1)">Hint</button>';
-                    break;
-                    
-                case 2:
-                    html += 'Find rank(A) from Coefficient Matrix</h4>';
-                    html += '<p>Look at just the coefficient matrix (without RHS). What is its rank?</p>';
-                    html += `<p><strong>Hint:</strong> Count linearly independent rows in the coefficient matrix.</p>`;
-                    html += `<input type="number" id="answer-step2" min="0" max="${result.m}" style="padding: 10px; width: 150px; font-size: 1.2rem;">`;
-                    html += '<button class="btn btn-solve" onclick="checkStepAnswer(2)" style="margin-top: 15px; margin-left: 10px;">Submit Rank(A)</button>';
-                    html += '<button class="btn" style="background: #f39c12; color: white; margin-left: 10px; margin-top: 15px;" onclick="showHint(2)">Hint</button>';
-                    break;
-                    
-                case 3:
-                    html += 'Find rank([A|B]) from Augmented Matrix</h4>';
-                    html += '<p>Consider the full augmented matrix. What is its rank?</p>';
-                    html += `<input type="number" id="answer-step3" min="0" max="${result.m}" style="padding: 10px; width: 150px; font-size: 1.2rem;">`;
-                    html += '<button class="btn btn-solve" onclick="checkStepAnswer(3)" style="margin-top: 15px; margin-left: 10px;">Submit Rank([A|B])</button>';
-                    html += '<button class="btn" style="background: #f39c12; color: white; margin-left: 10px; margin-top: 15px;" onclick="showHint(3)">Hint</button>';
-                    break;
-                    
-                case 4:
-                    html += 'Determine Solution Type</h4>';
-                    html += '<p>Based on ranks, determine the type of solution:</p>';
-                    html += '<select id="answer-step4" style="padding: 10px; font-size: 1.1rem;">';
-                    html += '<option value="">Select...</option>';
-                    html += '<option value="unique">Unique Solution</option>';
-                    html += '<option value="infinite">Infinite Solutions</option>';
-                    html += '<option value="none">No Solution (Inconsistent)</option>';
-                    html += '</select>';
-                    html += '<button class="btn btn-solve" onclick="checkStepAnswer(4)" style="margin-top: 15px; margin-left: 10px;">Submit Solution Type</button>';
-                    html += '<button class="btn" style="background: #f39c12; color: white; margin-left: 10px; margin-top: 15px;" onclick="showHint(4)">Hint</button>';
-                    break;
-                    
-                case 5:
-                    html += 'Verify the Complete Solution</h4>';
-                    html += '<p>Based on the rank analysis, what is the solution?</p>';
-                    if (result.solutionType === 'unique') {
-                        html += '<p>Enter the solution values for each variable:</p>';
-                        for (let i = 0; i < result.n; i++) {
-                            html += `<div style="margin: 10px 0;">
-                                <label>x<sub>${i+1}</sub> = </label>
-                                <input type="number" id="sol${i}" step="any" style="padding: 8px; width: 120px; margin-left: 10px;">
-                            </div>`;
-                        }
-                    } else if (result.solutionType === 'infinite') {
-                        html += '<p>Describe the solution (e.g., "Infinite solutions with x₂ as free variable")</p>';
-                        html += '<textarea id="sol-desc" rows="3" style="width: 100%; padding: 10px;"></textarea>';
-                    } else {
-                        html += '<p>The system has no solution because it is inconsistent.</p>';
-                        html += '<label><input type="checkbox" id="confirm-no-sol"> I understand this system has no solution</label>';
-                    }
-                    html += '<button class="btn btn-solve" onclick="checkStepAnswer(5)" style="margin-top: 15px;">Submit Final Solution</button>';
-                    html += '<button class="btn" style="background: #f39c12; color: white; margin-left: 10px; margin-top: 15px;" onclick="showHint(5)">Hint</button>';
-                    break;
-            }
-            
-            html += '<div class="hint-box" id="hint-box"></div>';
-            container.innerHTML = html;
-        }
-        
-        function generateAugmentedMatrixInput(augmented, m, n) {
-            let html = '<div style="overflow-x: auto; margin: 15px 0;"><table style="border-collapse: collapse;">';
-            
-            for (let i = 0; i < m; i++) {
-                html += '<tr>';
-                for (let j = 0; j < n; j++) {
-                    html += `<td style="padding: 5px;">
-                        <input type="number" id="aug${i}${j}" step="any" style="width: 60px; padding: 5px; text-align: center;">
-                    </td>`;
-                }
-                html += '<td style="padding: 5px; font-weight: bold;">|</td>';
-                html += `<td style="padding: 5px;">
-                    <input type="number" id="augb${i}" step="any" style="width: 60px; padding: 5px; text-align: center;">
-                </td>`;
-                html += '</tr>';
-            }
-            
-            html += '</table></div>';
-            return html;
-        }
-        
-        function checkStepAnswer(step) {
-            const result = simState.solutionData;
-            let correct = false;
-            
-            switch(step) {
-                case 1:
-                    correct = checkAugmentedMatrix(result);
-                    break;
-                case 2:
-                    const rankA = parseInt(document.getElementById('answer-step2').value);
-                    correct = (rankA === result.rankA);
-                    break;
-                case 3:
-                    const rankAB = parseInt(document.getElementById('answer-step3').value);
-                    correct = (rankAB === result.rankAB);
-                    break;
-                case 4:
-                    const solType = document.getElementById('answer-step4').value;
-                    correct = (solType === result.solutionType);
-                    break;
-                case 5:
-                    correct = checkFinalSolution(result);
-                    break;
-            }
-            
-            if (correct) {
-                simState.wrongAttempts = 0;
-                showMessage('Correct! Well done!', 'success');
-                
-                if (step < 5) {
-                    simState.step++;
-                    showStepInteraction();
-                } else {
-                    // Show final complete solution and graph
-                    showCompleteSolution();
-                }
-            } else {
-                simState.wrongAttempts++;
-                const remaining = simState.maxWrongAttempts - simState.wrongAttempts;
-                
-                if (simState.wrongAttempts >= simState.maxWrongAttempts) {
-                    showMessage(`Incorrect. Here's the correct answer. Moving to next step.`, 'warning');
-                    if (step < 5) {
-                        simState.step++;
-                        simState.wrongAttempts = 0;
-                        showStepInteraction();
-                    } else {
-                        showCompleteSolution();
-                    }
-                } else {
-                    showMessage(`Incorrect. ${remaining} attempt${remaining > 1 ? 's' : ''} remaining. Try again or use hint.`, 'error');
-                }
-            }
-        }
-        
-        function checkAugmentedMatrix(result) {
-            for (let i = 0; i < result.m; i++) {
-                for (let j = 0; j < result.n; j++) {
-                    const val = parseFloat(document.getElementById(`aug${i}${j}`).value);
-                    if (Math.abs(val - result.augmented[i][j]) > 1e-6) return false;
-                }
-                const bVal = parseFloat(document.getElementById(`augb${i}`).value);
-                if (Math.abs(bVal - result.augmented[i][result.n]) > 1e-6) return false;
-            }
-            return true;
-        }
-        
-        function checkFinalSolution(result) {
-            if (result.solutionType === 'none') {
-                return document.getElementById('confirm-no-sol').checked;
-            } else if (result.solutionType === 'unique') {
-                for (let i = 0; i < result.n; i++) {
-                    const val = parseFloat(document.getElementById(`sol${i}`).value);
-                    if (isNaN(val) || Math.abs(val - result.solution[i]) > 1e-4) return false;
-                }
-                return true;
-            } else {
-                const desc = document.getElementById('sol-desc').value.toLowerCase();
-                return desc.includes('infinite') || desc.includes('free');
-            }
-        }
-        
-        function showHint(step) {
-            const hintBox = document.getElementById('hint-box');
-            const result = simState.solutionData;
-            
-            let hint = '';
-            switch(step) {
-                case 1:
-                    hint = `<strong>Hint:</strong> The augmented matrix combines coefficients with RHS.<br>
-                            Example format: For equations ax+by=c, dx+ey=f<br>
-                            Matrix: [[a,b,c],[d,e,f]]<br>
-                            <strong>Your augmented matrix is:</strong><br>
-                            <pre>${result.augmented.map(r => '[' + r.join(', ') + ']').join('\n')}</pre>`;
-                    break;
-                case 2:
-                    hint = `<strong>Hint:</strong> Rank(A) = number of non-zero rows after row reduction.<br>
-                            The coefficient matrix (first ${result.n} columns) has rank <strong>${result.rankA}</strong>`;
-                    break;
-                case 3:
-                    hint = `<strong>Hint:</strong> Rank([A|B]) = number of non-zero rows in the full augmented matrix.<br>
-                            The augmented matrix has rank <strong>${result.rankAB}</strong>`;
-                    break;
-                case 4:
-                    hint = `<strong>Hint:</strong> Compare rank(A)=${result.rankA} with rank([A|B])=${result.rankAB} and n=${result.n}.<br>
-                            ${result.rankA === result.rankAB ? 
-                                (result.rankA === result.n ? 'Ranks equal n → Unique solution' : 'Ranks equal but < n → Infinite solutions') : 
-                                'Ranks differ → No solution'}`;
-                    break;
-                case 5:
-                    if (result.solutionType === 'unique') {
-                        hint = `<strong>Solution:</strong> ${result.solution.map((v,i) => `x${i+1}=${v.toFixed(3)}`).join(', ')}`;
-                    } else if (result.solutionType === 'infinite') {
-                        hint = '<strong>Hint:</strong> Infinite solutions. Some variables are free.';
-                    } else {
-                        hint = '<strong>Hint:</strong> The system has no solution.';
-                    }
-                    break;
-            }
-            
-            hintBox.innerHTML = hint;
-            hintBox.style.display = 'block';
-        }
-        
-        function showCompleteSolution() {
-            const result = simState.solutionData;
-            
-            // Update results panel
-            document.getElementById('solution-status').textContent = 
-                result.solutionType === 'unique' ? 'Unique Solution' :
-                result.solutionType === 'infinite' ? 'Infinite Solutions' : 'No Solution';
-            document.getElementById('solution-status').className = 
-                `solution-status status-${result.solutionType === 'unique' ? 'unique' : result.solutionType === 'infinite' ? 'infinite' : 'none'}`;
-            
-            // Show solution values
-            const solutionDisplay = document.getElementById('solution-display');
-            if (result.solutionType === 'unique') {
-                solutionDisplay.innerHTML = result.solution.map((v, i) => 
-                    `<div class="variable-item highlight">
-                        <div class="variable-name">x<sub>${i+1}</sub></div>
-                        <div class="variable-value">${v.toFixed(4)}</div>
-                    </div>`
-                ).join('');
-            } else if (result.solutionType === 'infinite') {
-                solutionDisplay.innerHTML = '<p>Infinite solutions exist. The solution space has dimension ' + 
-                    (result.n - result.rankA) + '.</p>';
-            } else {
-                solutionDisplay.innerHTML = '<p style="color: #e74c3c;"><i class="fas fa-exclamation-triangle"></i> No solution exists. The system is inconsistent.</p>';
-            }
-            
-            // Update properties
-            document.getElementById('prop-size').textContent = `${result.m} equations, ${result.n} variables`;
-            document.getElementById('prop-rankA').textContent = result.rankA;
-            document.getElementById('prop-rankAB').textContent = result.rankAB;
-            document.getElementById('prop-consistency').textContent = result.solutionType === 'none' ? 'Inconsistent' : 'Consistent';
-            document.getElementById('prop-type').textContent = result.solutionType;
-            
-            // Create graph
-            createPerfectGraph(result);
-            
-            document.getElementById('step-interaction-area').style.display = 'block';
-            document.getElementById('step-interaction-area').innerHTML = `
-                <div class="solution-box">
-                    <h4><i class="fas fa-check-circle"></i> Complete Solution</h4>
-                    <p><strong>Rank(A) = ${result.rankA}, Rank([A|B]) = ${result.rankAB}, n = ${result.n}</strong></p>
-                    <p><strong>Solution Type:</strong> ${result.solutionType}</p>
-                    ${result.solutionType === 'unique' ? 
-                        '<p><strong>Solution:</strong> ' + result.solution.map((v,i) => `x<sub>${i+1}</sub> = ${v.toFixed(4)}`).join(', ') + '</p>' : 
-                        result.solutionType === 'infinite' ? '<p>Infinite solutions with ' + (result.n - result.rankA) + ' free variable(s)</p>' :
-                        '<p>No solution - inconsistent system</p>'}
-                </div>
-                <button class="btn btn-example" onclick="resetSimulation()" style="margin-top: 15px;">
-                    <i class="fas fa-redo"></i> Solve Another System
-                </button>
-            `;
-        }
-        
-        function createPerfectGraph(result) {
-            const graphCanvas = document.getElementById('graph-canvas');
-            const graphPlaceholder = document.getElementById('graph-placeholder');
-            const graphLegend = document.getElementById('graph-legend');
-            
-            graphPlaceholder.style.display = 'none';
-            graphCanvas.innerHTML = '';
-            graphLegend.innerHTML = '';
-            
-            if (result.n === 2 && result.m >= 2) {
-                createPerfect2DGraph(result, graphCanvas, graphLegend);
-            } else if (result.n === 3 && result.m >= 3) {
-                createPerfect3DGraph(result, graphCanvas, graphLegend);
-            } else {
-                graphCanvas.innerHTML = `<p style="text-align: center; padding: 40px;">Graphical representation available for 2D (n=2) and 3D (n=3) systems with at least as many equations.</p>`;
-            }
-        }
-        
-        function createPerfect2DGraph(result, container, legend) {
-            const width = container.clientWidth || 400;
-            const height = container.clientHeight || 300;
-            const padding = 40;
-            const graphWidth = width - 2 * padding;
-            const graphHeight = height - 2 * padding;
-            
-            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-            svg.setAttribute('width', '100%');
-            svg.setAttribute('height', '100%');
-            svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-            container.appendChild(svg);
-            
-            // Background
-            const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            bg.setAttribute('width', width);
-            bg.setAttribute('height', height);
-            bg.setAttribute('fill', '#fafafa');
-            svg.appendChild(bg);
-            
-            // Determine scale
-            let maxAbs = 1;
-            for (let i = 0; i < result.m; i++) {
-                const a = result.augmented[i][0];
-                const b = result.augmented[i][1];
-                const c = result.augmented[i][2];
-                if (Math.abs(a) > maxAbs) maxAbs = Math.abs(a);
-                if (Math.abs(b) > maxAbs) maxAbs = Math.abs(b);
-                if (Math.abs(c) > maxAbs) maxAbs = Math.abs(c);
-            }
-            if (result.solutionType === 'unique' && result.solution) {
-                if (Math.abs(result.solution[0]) > maxAbs) maxAbs = Math.abs(result.solution[0]);
-                if (Math.abs(result.solution[1]) > maxAbs) maxAbs = Math.abs(result.solution[1]);
-            }
-            const scale = maxAbs + 2;
-            
-            const toX = (val) => padding + (val + scale) / (2 * scale) * graphWidth;
-            const toY = (val) => height - padding - (val + scale) / (2 * scale) * graphHeight;
-            
-            // Draw grid
-            for (let i = -scale; i <= scale; i++) {
-                const x = toX(i);
-                const y = toY(i);
-                
-                const vLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                vLine.setAttribute('x1', x); vLine.setAttribute('y1', padding);
-                vLine.setAttribute('x2', x); vLine.setAttribute('y2', height - padding);
-                vLine.setAttribute('stroke', '#e0e0e0'); vLine.setAttribute('stroke-width', '0.5');
-                svg.appendChild(vLine);
-                
-                const hLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                hLine.setAttribute('x1', padding); hLine.setAttribute('y1', y);
-                hLine.setAttribute('x2', width - padding); hLine.setAttribute('y2', y);
-                hLine.setAttribute('stroke', '#e0e0e0'); hLine.setAttribute('stroke-width', '0.5');
-                svg.appendChild(hLine);
-            }
-            
-            // Draw axes
-            const xAxis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            xAxis.setAttribute('x1', padding); xAxis.setAttribute('y1', toY(0));
-            xAxis.setAttribute('x2', width - padding); xAxis.setAttribute('y2', toY(0));
-            xAxis.setAttribute('stroke', '#333'); xAxis.setAttribute('stroke-width', '2');
-            svg.appendChild(xAxis);
-            
-            const yAxis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            yAxis.setAttribute('x1', toX(0)); yAxis.setAttribute('y1', padding);
-            yAxis.setAttribute('x2', toX(0)); yAxis.setAttribute('y2', height - padding);
-            yAxis.setAttribute('stroke', '#333'); yAxis.setAttribute('stroke-width', '2');
-            svg.appendChild(yAxis);
-            
-            // Draw lines
-            const colors = ['#e74c3c', '#3498db', '#2ecc71', '#9b59b6', '#f39c12'];
-            
-            for (let i = 0; i < Math.min(result.m, 2); i++) {
-                const a = result.augmented[i][0];
-                const b = result.augmented[i][1];
-                const c = result.augmented[i][2];
-                
-                if (Math.abs(b) > 1e-10) {
-                    // y = (c - ax)/b
-                    const x1 = -scale;
-                    const y1 = (c - a * x1) / b;
-                    const x2 = scale;
-                    const y2 = (c - a * x2) / b;
-                    
-                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                    line.setAttribute('x1', toX(x1)); line.setAttribute('y1', toY(y1));
-                    line.setAttribute('x2', toX(x2)); line.setAttribute('y2', toY(y2));
-                    line.setAttribute('stroke', colors[i]); line.setAttribute('stroke-width', '2.5');
-                    svg.appendChild(line);
-                } else if (Math.abs(a) > 1e-10) {
-                    // x = c/a (vertical line)
-                    const x = c / a;
-                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                    line.setAttribute('x1', toX(x)); line.setAttribute('y1', padding);
-                    line.setAttribute('x2', toX(x)); line.setAttribute('y2', height - padding);
-                    line.setAttribute('stroke', colors[i]); line.setAttribute('stroke-width', '2.5');
-                    svg.appendChild(line);
-                }
-                
-                // Legend
-                const legendItem = document.createElement('div');
-                legendItem.className = 'legend-item';
-                legendItem.innerHTML = `<div class="legend-color" style="background: ${colors[i]}"></div><span>Eq${i+1}: ${a.toFixed(1)}x₁ + ${b.toFixed(1)}x₂ = ${c.toFixed(1)}</span>`;
-                legend.appendChild(legendItem);
-            }
-            
-            // Draw solution point
-            if (result.solutionType === 'unique' && result.solution) {
-                const sx = toX(result.solution[0]);
-                const sy = toY(result.solution[1]);
-                
-                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                circle.setAttribute('cx', sx); circle.setAttribute('cy', sy);
-                circle.setAttribute('r', '6'); circle.setAttribute('fill', '#f39c12');
-                circle.setAttribute('stroke', '#fff'); circle.setAttribute('stroke-width', '3');
-                svg.appendChild(circle);
-                
-                const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                label.setAttribute('x', sx + 10); label.setAttribute('y', sy - 10);
-                label.setAttribute('fill', '#f39c12'); label.setAttribute('font-size', '12');
-                label.setAttribute('font-weight', 'bold');
-                label.textContent = `(${result.solution[0].toFixed(2)}, ${result.solution[1].toFixed(2)})`;
-                svg.appendChild(label);
-                
-                const legendItem = document.createElement('div');
-                legendItem.className = 'legend-item';
-                legendItem.innerHTML = `<div class="legend-color color-solution"></div><span>Solution: (${result.solution[0].toFixed(2)}, ${result.solution[1].toFixed(2)})</span>`;
-                legend.appendChild(legendItem);
-            }
-        }
-        
-        function createPerfect3DGraph(result, container, legend) {
-            container.innerHTML = `
-                <div class="graph-3d-container">
-                    <div class="graph-3d">
-                        <div style="position: absolute; left: 50%; top: 50%; width: 200px; height: 2px; background: #e74c3c; transform: translate(-50%, -50%) rotateX(90deg);"></div>
-                        <div style="position: absolute; left: 50%; top: 50%; width: 2px; height: 200px; background: #3498db; transform: translate(-50%, -50%);"></div>
-                        <div style="position: absolute; left: 50%; top: 50%; width: 200px; height: 2px; background: #2ecc71; transform: translate(-50%, -50%) rotateY(90deg);"></div>
-                    </div>
-                </div>
-                <p style="text-align: center; margin-top: 15px; color: #7f8c8d;">3D visualization showing plane intersections</p>
-            `;
-            
-            const colors = ['#e74c3c', '#3498db', '#2ecc71'];
-            for (let i = 0; i < Math.min(result.m, 3); i++) {
-                const legendItem = document.createElement('div');
-                legendItem.className = 'legend-item';
-                legendItem.innerHTML = `<div class="legend-color" style="background: ${colors[i]}"></div><span>Plane ${i+1}</span>`;
-                legend.appendChild(legendItem);
-            }
-            
-            if (result.solutionType === 'unique' && result.solution) {
-                const legendItem = document.createElement('div');
-                legendItem.className = 'legend-item';
-                legendItem.innerHTML = `<div class="legend-color color-solution"></div><span>Solution: (${result.solution.map(v => v.toFixed(2)).join(', ')})</span>`;
-                legend.appendChild(legendItem);
-            }
-        }
-        
-        function resetSimulation() {
-            simState = {
-                m: 2,
-                n: 2,
-                A: [],
-                B: [],
-                step: 0,
-                wrongAttempts: 0,
-                maxWrongAttempts: 3,
-                solutionData: null,
-                currentREF: null,
-                currentAugmented: null
-            };
-            
-            document.getElementById('matrix-input-dynamic').style.display = 'none';
-            document.getElementById('step-interaction-area').style.display = 'none';
-            resetResultsPanel();
-        }
-        
-        function resetResultsPanel() {
-            document.getElementById('solution-status').textContent = 'Ready';
-            document.getElementById('solution-status').className = 'solution-status';
-            document.getElementById('solution-display').innerHTML = `
-                <p style="text-align: center; color: #7f8c8d; padding: 40px 20px;">
-                    <i class="fas fa-calculator" style="font-size: 3rem; margin-bottom: 15px; display: block; color: #bdc3c7;"></i>
-                    Start by configuring your system on the left
-                </p>
-            `;
-            document.getElementById('prop-size').textContent = '-';
-            document.getElementById('prop-rankA').textContent = '-';
-            document.getElementById('prop-rankAB').textContent = '-';
-            document.getElementById('prop-consistency').textContent = '-';
-            document.getElementById('prop-type').textContent = '-';
-            
-            const graphCanvas = document.getElementById('graph-canvas');
-            const graphPlaceholder = document.getElementById('graph-placeholder');
-            const graphLegend = document.getElementById('graph-legend');
-            
-            graphCanvas.innerHTML = '';
-            graphPlaceholder.style.display = 'flex';
-            graphLegend.innerHTML = '';
-        }
-        
-        // ============ POSTTEST INITIALIZATION ============
-        function initializePosttest() {
-            document.querySelectorAll('#posttest .option').forEach(option => {
-                option.addEventListener('click', function(e) {
-                    if (e.target.type === 'radio') return;
-                    const radio = this.querySelector('input[type="radio"]');
-                    if (radio) {
-                        radio.checked = true;
-                        const options = this.closest('.options').querySelectorAll('.option');
-                        options.forEach(opt => opt.classList.remove('selected'));
-                        this.classList.add('selected');
-                        
-                        const questionId = radio.name;
-                        const value = radio.value;
-                        showPosttestFeedback(questionId, value);
-                    }
-                });
-            });
-            
-            document.getElementById('submit-posttest').addEventListener('click', submitPosttestHandler);
-        }
-        
-        function showPosttestFeedback(questionId, value) {
-            const correctAnswers = {
-                'p1': { correct: 'a', text: 'x = 2, y = 1' },
-                'p2': { correct: 'c', text: 'Infinite Solutions' },
-                'p3': { correct: 'a', text: 'x = 2, y = 3, z = -1' },
-                'p4': { correct: 'a', text: 'det(A) = 0, Infinite Solutions' },
-                'p5': { correct: 'c', text: 'No Solution' }
-            };
-            
-            const feedbackDiv = document.getElementById(`${questionId}-feedback`);
-            const answer = correctAnswers[questionId];
-            
-            if (value === answer.correct) {
-                feedbackDiv.innerHTML = `<i class="fas fa-check-circle"></i> <strong>Correct!</strong>`;
-                feedbackDiv.className = 'answer-feedback feedback-correct';
-            } else {
-                feedbackDiv.innerHTML = `<i class="fas fa-times-circle"></i> <strong>Incorrect.</strong> The correct answer is: <strong>${answer.text}</strong>`;
-                feedbackDiv.className = 'answer-feedback feedback-incorrect';
-            }
-            feedbackDiv.style.display = 'block';
-        }
-        
-        function submitPosttestHandler() {
-            let score = 0;
-            const correctAnswers = {
-                'p1': 'a', 'p2': 'c', 'p3': 'a', 'p4': 'a', 'p5': 'c'
-            };
-            
-            for (let i = 1; i <= 5; i++) {
-                const selected = document.querySelector(`input[name="p${i}"]:checked`);
-                if (selected && selected.value === correctAnswers[`p${i}`]) {
-                    score++;
-                }
-            }
-            
-            const resultsDiv = document.getElementById('posttest-results');
-            const percentage = (score / 5) * 100;
-            
-            resultsDiv.innerHTML = `
-                <div style="background: ${percentage >= 80 ? '#d5f4e6' : '#fdebd0'}; padding: 30px; border-radius: 10px; margin-top: 30px; text-align: center;">
-                    <h3>${percentage >= 80 ? 'Outstanding!' : 'Good Effort!'}</h3>
-                    <p style="font-size: 1.5rem; font-weight: bold; margin: 15px 0;">Score: ${score}/5 (${percentage.toFixed(0)}%)</p>
-                </div>
-            `;
-            resultsDiv.style.display = 'block';
-            resultsDiv.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // ============ FEEDBACK INITIALIZATION ============
-        function initializeFeedback() {
-            document.getElementById('feedback-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const comments = document.getElementById('comments').value;
-                if (!comments.trim()) {
-                    showMessage('Please provide comments in the feedback form.', 'error');
-                    return;
-                }
-                
-                const submitBtn = document.getElementById('submit-feedback');
-                const originalText = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-                submitBtn.disabled = true;
-                
-                fetch('https://formspree.io/f/mojaonbz', {
-                    method: 'POST',
-                    body: new FormData(document.getElementById('feedback-form')),
-                    headers: { 'Accept': 'application/json' }
-                })
-                .then(response => {
-                    showMessage('Thank you! Your feedback has been submitted successfully.', 'success');
-                    document.getElementById('feedback-form').reset();
-                })
-                .catch(error => {
-                    showMessage('Network error. Please try again.', 'error');
-                })
-                .finally(() => {
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                });
-            });
-        }
-        
-        // ============ UTILITY FUNCTIONS ============
-        function showMessage(message, type) {
-            const existingMessage = document.getElementById('temp-message');
-            if (existingMessage) existingMessage.remove();
-            
-            const messageElement = document.createElement('div');
-            messageElement.id = 'temp-message';
-            messageElement.style.cssText = `
-                position: fixed; top: 100px; right: 30px; padding: 15px 25px;
-                border-radius: 8px; font-weight: 600; z-index: 1000;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: all 0.3s; max-width: 400px;
-                background: ${type === 'success' ? '#d5f4e6' : type === 'warning' ? '#fdebd0' : '#fadbd8'};
-                color: ${type === 'success' ? '#27ae60' : type === 'warning' ? '#f39c12' : '#e74c3c'};
-                border-left: 5px solid ${type === 'success' ? '#27ae60' : type === 'warning' ? '#f39c12' : '#e74c3c'};
-            `;
-            messageElement.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'times-circle'}"></i>
-                    <span>${message}</span>
-                </div>
-            `;
-            
-            document.body.appendChild(messageElement);
-            
-            setTimeout(() => {
-                messageElement.style.opacity = '0';
-                messageElement.style.transform = 'translateX(100px)';
-                setTimeout(() => { if (messageElement.parentNode) messageElement.remove(); }, 300);
-            }, 4000);
-        }
+        });
+
+        // Feedback button interaction
+        const feedbackButton = document.querySelector('.feedback-button');
+        feedbackButton.addEventListener('click', () => {
+            alert('Thank you for your willingness to provide feedback! In a real application, this would open a feedback form.');
+        });
+
+        // Simulate active section based on URL or user interaction
+        document.addEventListener('DOMContentLoaded', () => {
+            // Highlight the first section card
+            sectionCards[0].classList.add('active');
+        });
     </script>
 </body>
 </html>
